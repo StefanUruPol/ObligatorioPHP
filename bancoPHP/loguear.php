@@ -2,14 +2,10 @@
 require 'conexion.php';
 session_start();
 
-
 $email = $_POST['email'];
-$password = $_POST['password']; 
+$contrasenia = $_POST['password']; 
 
-
-
-$query = "SELECT COUNT(*) as contar FROM usuario  WHERE email = '$email'
-AND password = '$password'";
+$query = "SELECT COUNT(*) as contar FROM persona  WHERE email = '$email' AND password = '$contrasenia'";
 $consulta = mysqli_query($conexion, $query);
 $array = mysqli_fetch_array($consulta);
 
