@@ -7,4 +7,5 @@
         private $segundo_apellido;
         private $fecha_nacimiento;
         private $foto;
+        private $codigo_credencial;
     }
