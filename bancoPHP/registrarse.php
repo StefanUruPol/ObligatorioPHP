@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Banco PHP - Registar Usuario</title>
+    <title>Banco PHP - Registrar Usuario</title>
     <meta htpp-equiv="Refresh" content="10" charset="UTF-8">
 
 </head>

@@ -8,7 +8,7 @@
 <html>
 
 <head>
-    <title>Banco PHP - Registar Usuario</title>
+    <title>Banco PHP - Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
@@ -20,10 +20,13 @@
     $email = $_SESSION['email'];
 
     if (!isset($email)) {
-    header("login.php");
+        header("login.php");
+
     } else {
 
-        $sql = mysqli_query($conexion, "SELECT * FROM persona");
+        $sql = mysqli_query($conexion, "SELECT * FROM persona
+                            WHERE email= '$email'");
+
         $data = mysqli_fetch_array($sql);
 
         echo "<h1> BIENVENIDO " .$data['primer_nombre'] . " " . $data['primer_apellido']. "</h1>
