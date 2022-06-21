@@ -29,7 +29,8 @@
 
         $data = mysqli_fetch_array($sql);
 
-        echo "<h1> BIENVENIDO " .$data['primer_nombre'] . " " . $data['primer_apellido']. "</h1>
+        echo "<h1> BIENVENIDO " .$data['primer_nombre'] . " " . $data['primer_apellido']. "</h1> <img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '100px'/><br><br>
+
 
         <button><a href='salir.php'> Salir </a></button>";
     }

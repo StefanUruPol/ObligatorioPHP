@@ -57,22 +57,15 @@
                 $secondSurname = $_POST['segundoApellido'];
                 $date = $_POST['fechaDeNacimiento'];
                 $correo = $_POST['email'];
-                $photo = $_FILES['foto']['name'];
+                //$photo = $_FILES['foto']['name'];
                 $contrasenia = $_POST['password'];
+                
+                $photo= addslashes(file_get_contents($_FILES['foto']['tmp_name']));
 
-                if (isset($photo) && $photo != "") {
-	  
-                    $nom = $_FILES["foto"]["name"];
-                  
-                    $tam = $_FILES["foto"]["size"];
-                    
-                    $tipo = $_FILES["foto"]["type"];
-                }
-
-                $sql = "INSERT INTO persona (CI, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_de_nacimiento, email, foto, password)
+                $query = "INSERT INTO persona (CI, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_de_nacimiento, email, foto, password)
                         VALUES ('$cedula', '$firstName', '$secondName', '$firstSurname', '$secondSurname', '$date', '$correo', '$photo', '$contrasenia')";
 
-                $resultado = mysqli_query($conexion, $sql);
+                $resultado = $conexion->query ($query);
 
                 if ($resultado) {
                     echo "<p style=' text-align: center'><strong> Se Agrego Correctamente una Nuevo Usuario </strong></p></br>";
