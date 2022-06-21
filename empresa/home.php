@@ -29,7 +29,7 @@
 
         echo "<h1> BIENVENIDO " .$data['nombre']. "</h1>
 
-        <button><a href='salir.php'> Cerrar Sesión </a></button>";
+        <button><a href='salir.php'> Salir </a></button>";
     }
     ?>
 

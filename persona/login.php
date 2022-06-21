@@ -15,7 +15,7 @@
 
       <input type= "submit" name="ingresar" value="Ingresar"/>
       <button type= "button" name="registrarse" value="Registrarse"><a href= "registrarse.php"> Registrarse </a></button>
-      <button type= "button" name="salir"><a href='/ObligatorioPHP/index.php'> Salir </a></button>
+      <button type= "button" name="salir"><a href='/ObligatorioPHP/index.php'> Inicio </a></button>
       
     </form>
   </body>
