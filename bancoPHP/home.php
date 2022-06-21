@@ -2,6 +2,20 @@
 
     include 'conexion.php';
 
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Banco PHP - Registar Usuario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+    <form>
+
+    <?php
     session_start();
     $email = $_SESSION['email'];
 
@@ -9,16 +23,15 @@
     header("login.php");
     } else {
 
-        $codigo=$_GET['ci'];
+        $sql = mysqli_query($conexion, "SELECT * FROM persona");
+        $data = mysqli_fetch_array($sql);
 
-        $sql = mysqli_query($conexion, "SELECT * FROM pelicula, genero, lenguaje
-               WHERE codigo_pelicula= '$codigo'
-			   AND genero = codigo_genero
-		       AND lenguaje = codigo_lenguaje");
+        echo "<h1> BIENVENIDO " .$data['primer_nombre'] . " " . $data['primer_apellido']. "</h1>
 
-        echo "<h1>BIENVENIDO $nombre </h1>";
-
-        echo "<button><a href='salir.php'>SALIR</a></button>";
+        <button><a href='salir.php'>SALIR</a></button>";
     }
+    ?>
 
-?>
+    </form>
+  </body>
+</html>

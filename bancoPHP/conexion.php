@@ -2,6 +2,8 @@
 
 $conexion = mysqli_connect("127.0.0.1", "root", "", "obligatorio_bancophp"); 
 
+$conexion ->query("SET NAMES 'utf8'");
+
 /*if (!$conexion) { 
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL; echo "error de depuración: " . mysqli_connect_error() . PHP_EOL; 
     exit; } 
@@ -10,3 +12,4 @@ $conexion = mysqli_connect("127.0.0.1", "root", "", "obligatorio_bancophp");
         echo "Información del host: " . mysqli_get_host_info($conexion) . PHP_EOL . '<br>'; 
         $conexion ->query("SET NAMES 'utf8'"); } ?>
         */
+?>

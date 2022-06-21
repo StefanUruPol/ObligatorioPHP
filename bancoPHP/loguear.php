@@ -15,7 +15,7 @@ if($array['contar'] > 0){
   
             // Destroying session after 1 minute
             $_SESSION['expire'] = $_SESSION['start'] + (1 * 10) ; 
-    header("location: paginaprincipal.php");
+    header("location: home.php");
 
 } else {?>
     <?php include("login.php"); ?> <h1 class="bad">Usuario inválido</h1> <?php }
