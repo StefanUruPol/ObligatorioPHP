@@ -57,7 +57,7 @@
                 $secondSurname = $_POST['segundoApellido'];
                 $date = $_POST['fechaDeNacimiento'];
                 $correo = $_POST['email'];
-                $contrasenia = $_POST['password'];
+                $contrasenia = md5($_POST['password']);
                 $photo= addslashes(file_get_contents($_FILES['foto']['tmp_name']));
 
                 $query = "INSERT INTO persona (CI, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_de_nacimiento, email, foto, password)
