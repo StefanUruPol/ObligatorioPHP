@@ -17,6 +17,38 @@
 
     <?php
     session_start();
+    
+        if(!isset($_SESSION['start']))
+
+{
+
+    //Set the session start time
+
+    $_SESSION['start'] = time();
+
+}
+
+
+//Check the session is expired or not
+
+if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+
+    //Unset the session variables
+
+    session_unset();
+
+    //Destroy the session
+
+    session_destroy();
+
+    echo "Session is expired.<br/>";
+
+}
+
+else
+
+    echo "Current session exists.<br/>";
+    
     $email = $_SESSION['email'];
 
     if (!isset($email)) {
