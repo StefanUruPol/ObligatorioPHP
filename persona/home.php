@@ -38,7 +38,9 @@ include 'conexion.php';
 
             session_destroy();
 
-            //echo "La Sesion de Usuario Expiró su Tiempo<br/>";
+            echo "La Sesion de Usuario Expiró su Tiempo<br/><br/>
+            <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
+            <button type='button' name='volver'><a href='index.php'> Salir </a></button>";
         } else
 
             //echo "Sesion de Usuario Existente.<br/>";
@@ -56,7 +58,11 @@ include 'conexion.php';
 
             echo "<h1> BIENVENIDO " . $data['primer_nombre'] . " " . $data['primer_apellido'] . "</h1>
             <img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '100px'/><br><br>
-            <button><a href='salir.php'> Salir </a></button>";
+
+            <a href='home.php'> Inicio </a><br>
+            <a href='historial.php'> Historial de Credenciales </a><br>
+            <a href='perfil.php'> Perfil </a><br>
+            <a href='salir.php'> Salir </a>";
         }
         ?>
 
