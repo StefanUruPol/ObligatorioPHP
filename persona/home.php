@@ -1,6 +1,6 @@
 <?php
 
-    include 'conexion.php';
+include 'conexion.php';
 
 ?>
 
@@ -9,65 +9,58 @@
 
 <head>
     <title>Banco PHP - Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
     <form>
 
-    <?php
-    session_start();
-    
-        if(!isset($_SESSION['start']))
+        <?php
+        session_start();
 
-{
+        if (!isset($_SESSION['start'])) {
 
-    //Set the session start time
+            //Set the session start time
 
-    $_SESSION['start'] = time();
-
-}
+            $_SESSION['start'] = time();
+        }
 
 
-//Check the session is expired or not
+        //Check the session is expired or not
 
-if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
 
-    //Unset the session variables
+            //Unset the session variables
 
-    session_unset();
+            session_unset();
 
-    //Destroy the session
+            //Destroy the session
 
-    session_destroy();
+            session_destroy();
 
-    echo "Session is expired.<br/>";
+            echo "Session is expired.<br/>";
+        } else
 
-}
+            echo "Current session exists.<br/>";
 
-else
+        $email = $_SESSION['email'];
 
-    echo "Current session exists.<br/>";
-    
-    $email = $_SESSION['email'];
+        if (!isset($email)) {
+            header("login.php");
+        } else {
 
-    if (!isset($email)) {
-        header("login.php");
-
-    } else {
-
-        $sql = mysqli_query($conexion, "SELECT * FROM persona
+            $sql = mysqli_query($conexion, "SELECT * FROM persona
                             WHERE email= '$email'");
 
-        $data = mysqli_fetch_array($sql);
+            $data = mysqli_fetch_array($sql);
 
-        echo "<h1> BIENVENIDO " .$data['primer_nombre'] . " " . $data['primer_apellido']. "</h1> <img src = 'data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '100px'/><br><br>
-
-
-        <button><a href='salir.php'> Salir </a></button>";
-    }
-    ?>
+            echo "<h1> BIENVENIDO " . $data['primer_nombre'] . " " . $data['primer_apellido'] . "</h1>
+            <img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '100px'/><br><br>
+            <button><a href='salir.php'> Salir </a></button>";
+        }
+        ?>
 
     </form>
-  </body>
+</body>
+
 </html>
