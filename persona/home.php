@@ -38,10 +38,10 @@ include 'conexion.php';
 
             session_destroy();
 
-            echo "Session is expired.<br/>";
+            //echo "La Sesion de Usuario Expiró su Tiempo<br/>";
         } else
 
-            echo "Current session exists.<br/>";
+            //echo "Sesion de Usuario Existente.<br/>";
 
         $email = $_SESSION['email'];
 
