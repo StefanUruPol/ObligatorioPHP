@@ -48,8 +48,6 @@ $data = mysqli_fetch_array($sql);
             <label for="logo">Logo: </label>
             <img src = 'data:image/.jpg;base64, <?php echo base64_encode($data['logo']) ?>' width = '70px' height = '100px'/><br><br>
 
-            <button type="button" name="volver"><a href="home.php"> Volver </a></button>
-
         </form>
     </fieldset>
 </body>

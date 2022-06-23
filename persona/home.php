@@ -9,6 +9,7 @@ include 'conexion.php';
 <head>
     <title>Banco PHP - Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@ include 'conexion.php';
 
             //echo "Sesion de Usuario Existente.<br/>";
 
-        $email = $_SESSION['email'];
+            $email = $_SESSION['email'];
 
         if (!isset($email)) {
             header("login.php");
@@ -55,13 +56,16 @@ include 'conexion.php';
 
             $data = mysqli_fetch_array($sql);
 
-            echo "<h1> BIENVENIDO " . $data['primer_nombre'] . " " . $data['primer_apellido'] . "</h1>
-            <img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '100px'/><br><br>
-
-            <a href='home.php'> Inicio </a><br>
-            <a href='historial.php'> Historial de Credenciales </a><br>
-            <a href='perfil.php'> Perfil </a><br>
-            <a href='salir.php'> Salir </a>";
+            echo "
+            <header style=' padding: 3px;background-color: #001a57;'>
+            <button><a href='home.php'> Inicio </a></button>
+            <button><a href='historial.php'> Historial de Credenciales </a></button>
+            <button><a href='perfil.php'> Perfil </a></button>
+            <button><a href='salir.php'> Salir </a></button>
+            <h1 align='right'><font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font></h1>
+            </header></br>
+        
+            <h2 align='center'>Página Principal</h2><br>";
         }
         ?>
 
