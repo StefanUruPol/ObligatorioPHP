@@ -48,23 +48,14 @@
                 $name = $_POST['nombre'];
                 $dir = $_POST['direccion'];
                 $tel = $_POST['telefono'];
-                $logo = $_FILES['logo']['name'];
+                $logo = addslashes(file_get_contents($_FILES['logo']['tmp_name']));
                 $correo = $_POST['email'];
                 $contrasenia = md5($_POST['password']);
 
-                if (isset($logo) && $logo != "") {
-	  
-                    $nom = $_FILES["logo"]["name"];
-                  
-                    $tam = $_FILES["logo"]["size"];
-                    
-                    $tipo = $_FILES["logo"]["type"];
-                }
-
-                $sql = "INSERT INTO empresa (RUT, nombre, direccion, telefono, logo, email, password)
+                $query = "INSERT INTO empresa (RUT, nombre, direccion, telefono, logo, email, password)
                         VALUES ('$rut', '$name', '$dir', '$tel', '$logo', '$correo', '$contrasenia')";
 
-                $resultado = mysqli_query($conexion, $sql);
+                $resultado = $conexion->query($query);
 
                 if ($resultado) {
                     echo "<p style=' text-align: center'><strong> Se Agrego Correctamente una Nuevo Usuario </strong></p></br>";

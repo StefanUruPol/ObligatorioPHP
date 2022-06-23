@@ -56,6 +56,8 @@ include 'conexion.php';
             $data = mysqli_fetch_array($sql);
 
             echo "<h1> BIENVENIDO " . $data['nombre'] . "</h1>
+            <img src = data:image/.jpg;base64," . base64_encode($data['logo']) . " width = '70px' height = '100px'/><br><br>
+
             <a href='home.php'> Inicio </a><br>
             <a href='asignacion.php'> Asignación de Credenciales </a><br>
             <a href='historial.php'> Historial de Credenciales </a><br>
