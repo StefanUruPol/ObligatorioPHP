@@ -61,7 +61,7 @@ $data = mysqli_fetch_array($sql2);
 <body>
     <header style=" padding: 3px;background-color: #001a57;">
         <button><a href='home.php'> Inicio </a></button>
-        <button><a href='historial.php'> Detalle de Credencial </a></button>
+        <button><a href='historial.php'> Historial de Credenciales </a></button>
         <button><a href='perfil.php'> Perfil </a></button>
         <button><a href='salir.php'> Salir </a></button>
         <h1 align="right">
@@ -69,6 +69,9 @@ $data = mysqli_fetch_array($sql2);
         </h1>
 
     </header></br>
+
+    <h2 align="center">Detalle de Credencial</h2></br>
+
     <fieldset align="center" style="width:450px; margin:auto;"></br>
 
         <form>
