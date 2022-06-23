@@ -50,7 +50,7 @@
                 $tel = $_POST['telefono'];
                 $logo = $_FILES['logo']['name'];
                 $correo = $_POST['email'];
-                $contrasenia = $_POST['password'];
+                $contrasenia = md5($_POST['password']);
 
                 if (isset($logo) && $logo != "") {
 	  
