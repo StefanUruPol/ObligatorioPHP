@@ -1,5 +1,6 @@
 <?php
-    include 'conexion.php';
+
+include 'conexion.php';
 ?>
 
 <!DOCTYPE html>
@@ -7,64 +8,63 @@
 
 <head>
     <title>Banco PHP - Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
     <form>
 
-    <?php
-    session_start();
-    
-        if(!isset($_SESSION['start']))
+        <?php
+        session_start();
 
-{
+        if (!isset($_SESSION['start'])) {
 
-    //Set the session start time
+            //Set the session start time
 
-    $_SESSION['start'] = time();
-
-}
+            $_SESSION['start'] = time();
+        }
 
 
-//Check the session is expired or not
+        //Check the session is expired or not
 
-if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 60)) {
+        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 60)) {
 
-    //Unset the session variables
+            //Unset the session variables
 
-    session_unset();
+            session_unset();
 
-    //Destroy the session
+            //Destroy the session
 
-    session_destroy();
+            session_destroy();
 
-    echo "Session is expired.<br/>";
+            echo "<strong>La Sesion de Usuario Expiró su Tiempo</strong><br/><br/>
+            <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
+            <button type='button' name='volver'><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+        } else
 
-}
+            //echo "Sesion de Usuario Existente.<br/>";
 
-else
+        $email = $_SESSION['email'];
 
-    echo "Current session exists.<br/>";    
-    
-    $email = $_SESSION['email'];
+        if (!isset($email)) {
+            header("login.php");
+        } else {
 
-    if (!isset($email)) {
-        header("login.php");
-
-    } else {
-
-        $sql = mysqli_query($conexion, "SELECT * FROM empresa
+            $sql = mysqli_query($conexion, "SELECT * FROM empresa
                             WHERE email= '$email'");
 
-        $data = mysqli_fetch_array($sql);
+            $data = mysqli_fetch_array($sql);
 
-        echo "<h1> BIENVENIDO " .$data['nombre']. "</h1>
-
-        <button><a href='salir.php'> Salir </a></button>";
-    }
-    ?>
+            echo "<h1> BIENVENIDO " . $data['nombre'] . "</h1>
+            <a href='home.php'> Inicio </a><br>
+            <a href='asignacion.php'> Asignación de Credenciales </a><br>
+            <a href='historial.php'> Historial de Credenciales </a><br>
+            <a href='perfil.php'> Perfil </a><br>
+            <a href='salir.php'> Salir </a>";
+        }
+        ?>
 
     </form>
-  </body>
+</body>
+
 </html>

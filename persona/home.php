@@ -1,7 +1,6 @@
 <?php
 
 include 'conexion.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +37,9 @@ include 'conexion.php';
 
             session_destroy();
 
-            echo "La Sesion de Usuario Expiró su Tiempo<br/><br/>
+            echo "<strong>La Sesion de Usuario Expiró su Tiempo</strong><br/><br/>
             <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
-            <button type='button' name='volver'><a href='index.php'> Salir </a></button>";
+            <button type='button' name='volver'><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
         } else
 
             //echo "Sesion de Usuario Existente.<br/>";

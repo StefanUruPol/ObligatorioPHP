@@ -46,7 +46,7 @@ $data = mysqli_fetch_array($sql);
             <input type="text" name="segundoApellido" placeholder="Ingrese su Segundo Apellido" value= " <?php echo $data['segundo_apellido'] ?> " required></br></br>
 
             <label for="fecha">Fecha de Nacimiento: </label>
-            <input type="date" name="fechaDeNacimiento" value= " <?php echo $data['fecha_de_nacimiento']; ?> " required></br></br>
+            <input type="text" name="fechaDeNacimiento" value= " <?php echo $data['fecha_de_nacimiento'] ?> " required></br></br>
 
             <label for="email">Email: </label>
             <input type="email" name="email" placeholder="Ingrese su Dirección de Correo" size="25" value= " <?php echo $data['email'] ?> " required></br></br>
