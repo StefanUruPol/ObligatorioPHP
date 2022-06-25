@@ -56,6 +56,37 @@ include 'conexion.php';
 
             $data = mysqli_fetch_array($sql);
 
+        
+    
+
+               
+                
+                
+                $sql2 = mysqli_query($conexion, "SELECT 
+                    persona.codigo_credencial,
+                    empresa.logo,
+                    empresa.nombre,
+                    credencial.tipo,
+                    credencial.codigo,
+                    credencial.fecha_valida_hasta
+                FROM persona
+                JOIN empresa
+                    ON persona.codigo_credencial = empresa.codigo_credencial 
+                JOIN credencial
+                    ON credencial.codigo = empresa.codigo_credencial
+                   
+                    AND
+                    credencial.codigo = persona.codigo_credencial");
+
+                    $resultado = mysqli_fetch_array($sql2);
+
+                    
+        }    
+                    
+                    
+                    
+                   
+
             echo "
             <header style=' padding: 3px;background-color: #001a57;'>
             <button><a href='home.php'> Inicio </a></button>
@@ -65,8 +96,10 @@ include 'conexion.php';
             <h1 align='right'><font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font></h1>
             </header></br>
         
-            <h2 align='center'>Página Principal</h2><br>";
-        }
+            <h2 align='center'>Página Principal</h2><br> "
+            
+            . $resultado['RUT'];
+        
         ?>
 
     </form>
