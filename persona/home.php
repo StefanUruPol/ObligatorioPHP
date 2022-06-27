@@ -90,7 +90,28 @@ include 'conexion.php';
             </h1>
         </header></br>
 
-        <h2 align='center'><strong> BIENVENIDO</strong></h2><br>
+        <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
+
+        <p align='center'><strong> Credenciales Válidas</strong></p><br>
+
+        <table border='1' align='center' style='text-align: center; width: 40%'>
+            <tr>
+                <th>Empresa Emisora</th>
+                <th>Nombre</th>
+                <th>Tipo de Credencial</th>
+                <th>Código</th>
+                <th>Fecha Válida Hasta</th>
+            </tr>
+            <tr>
+                <td><img src="data:image/.jpg;base64, <?php echo base64_encode($resultado['logo']) ?>" width = '70px' height = '90px' /></td>
+                <td><?php echo $resultado['nombre'] ?></td>
+                <td><?php echo $resultado['tipo'] ?></td>
+                <td><?php echo $resultado['codigo'] ?></td>
+                <td><?php echo $resultado['fecha_valida_hasta'] ?></td>
+            </tr>
+
+        </table><br>
+
 
     </form>
 </body>

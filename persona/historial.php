@@ -38,13 +38,24 @@ if (!isset($email)) {
 
     $row = mysqli_fetch_array($sql);
 
+    $sql2 = mysqli_query($conexion, "SELECT 
+                    persona.codigo_credencial,
+                    empresa.logo,
+                    empresa.nombre,
+                    credencial.tipo,
+                    credencial.codigo,
+                    credencial.fecha_valida_hasta
+                FROM persona
+                JOIN empresa
+                    ON persona.codigo_credencial = empresa.codigo_credencial 
+                JOIN credencial
+                    ON credencial.codigo = empresa.codigo_credencial
+                   
+                    AND
+                    credencial.codigo = persona.codigo_credencial");
 
-    $sql2 = mysqli_query($conexion, "SELECT * FROM empresa, credencial
-          WHERE email = '$email'
-          AND codigo_credencial = codigo
-          ORDER BY fecha_valida_hasta DESC");
 
-    $data = mysqli_fetch_array($sql2);
+    $resultado = mysqli_fetch_array($sql2);
 }
 
 ?>
@@ -84,11 +95,11 @@ if (!isset($email)) {
                 <th>Fecha Válida Hasta</th>
             </tr>
             <tr>
-                <td><?php echo $data['nombre'] ?></td>
-                <td><?php echo $data['tipo'] ?></td>
-                <td><?php echo $data['codigo'] ?></td>
-                <td><?php echo $data['fecha_valida_hasta'] ?></td>
-                <td><a href='detalle_credencial.php'> Detalle de Credencial </a></td>
+                <td><?php echo $resultado['nombre'] ?></td>
+                <td><?php echo $resultado['tipo'] ?></td>
+                <td><?php echo $resultado['codigo'] ?></td>
+                <td><?php echo $resultado['fecha_valida_hasta'] ?></td>
+                <td><button type= "button" onclick= "location.href='detalle_credencial.php?codigo= <?php echo $resultado['codigo'] ?> ' "> Detalle de Credencial </td>
             </tr>
         </table><br>
     </form>

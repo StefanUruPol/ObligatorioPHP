@@ -39,10 +39,23 @@ if (!isset($email)) {
     $row = mysqli_fetch_array($sql);
 
 
-    $sql2 = mysqli_query($conexion, "SELECT * FROM empresa, credencial, tipo_credencial
-          WHERE email = '$email'
-          AND codigo_credencial = codigo
-          AND tipo = id_tipo");
+    $sql2 = mysqli_query($conexion, "SELECT 
+                    persona.codigo_credencial,
+                    empresa.nombre,
+                    credencial.tipo,
+                    credencial.codigo,
+                    credencial.fecha_valida_desde,
+                    credencial.fecha_valida_hasta,
+                    credencial.PIN
+                FROM persona
+                JOIN empresa
+                    ON persona.codigo_credencial = empresa.codigo_credencial 
+                JOIN credencial
+                    ON credencial.codigo = empresa.codigo_credencial
+                   
+                    AND
+                    credencial.codigo = persona.codigo_credencial");
+
 
     $data = mysqli_fetch_array($sql2);
 }
@@ -89,10 +102,10 @@ if (!isset($email)) {
             <input name="telefono" type="tel" pattern="([0-9]{4}(-[0-9]{4})(-[0-9]{4})(-[0-9]{4}))" placeholder="XXXX-XXXX-XXXX-XXXX" value="<?php echo $data['codigo'] ?>" required></br></br>
 
             <label for="email">Fecha válida desde: </label>
-            <input type="email" name="email" placeholder="Ingrese Fecha Válida Desde" size="21" value="<?php echo $data['email'] ?>" required></br></br>
+            <input type="email" name="email" placeholder="Ingrese Fecha Válida Desde" size="21" value="<?php echo $data['fecha_valida_desde'] ?>" required></br></br>
 
             <label for="email">Fecha válida hasta: </label>
-            <input type="email" name="email" placeholder="Ingrese Fecha Válida Hasta" size="21" value="<?php echo $data['email'] ?>" required></br></br>
+            <input type="email" name="email" placeholder="Ingrese Fecha Válida Hasta" size="21" value="<?php echo $data['fecha_valida_hasta'] ?>" required></br></br>
 
             <label for="logo">PIN: </label>
             <input name="pin" type="text" pattern="([0-9]{4})" placeholder="XXXX" value="<?php echo $data['PIN'] ?>" required></br></br>
