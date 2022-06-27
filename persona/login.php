@@ -24,8 +24,8 @@
       <input type="password" name="password" placeholder="Ingrese Contraseña" required /><br /><br />
 
       <input type="submit" name="ingresar" value="Ingresar" />
-      <button type="button" name="registrarse" value="Registrarse"><a href="registrarse.php"> Registrarse </a></button>
-      <button type="button" name="salir"><a href='/ObligatorioPHP/index.php'> Inicio </a></button>
+      <button type="button" name="registrarse" onclick="location.href='registrarse.php'"> Registrarse </button>
+      <button type="button" name="salir" onclick="location.href='/ObligatorioPHP/index.php'"> Inicio </button>
 
     </form>
   </fieldset>

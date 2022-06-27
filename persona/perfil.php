@@ -45,17 +45,20 @@ if (!isset($_SESSION['start'])) {
 
     <title>Banco PHP - Perfil de Usuario</title>
     <meta htpp-equiv="Refresh" content="10" charset="UTF-8">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="/ObligatorioPHP/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 </head>
 
 <body>
 
-    <header style=" padding: 3px;background-color: #001a57;">
-        <button><a href='home.php'> Inicio </a></button>
-        <button><a href='historial.php'> Historial de Credenciales </a></button>
-        <button><a href='perfil.php'> Perfil </a></button>
-        <button><a href='salir.php'> Salir </a></button>
+    <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
+        <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
+            <font color='#FFFFFF'> Banco PHP</font>
+        </h1>
+        <button type="button" onclick="location.href='home.php' "> Inicio</button>
+        <button type="button" onclick="location.href='historial.php';"> Historial de Credenciales</button>
+        <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
+        <button type="button" onclick="location.href='salir.php' "> Salir</button>
         <h1 align="right">
             <font color="#FFFFFF"><?php echo $data['primer_nombre'] . " " . $data['primer_apellido'] . " " ?><img src='data:image/.jpg;base64, <?php echo base64_encode($data['foto']) ?> ' width='70px' height='90px' /></font>
         </h1>
