@@ -15,6 +15,15 @@ include 'conexion.php';
 <body>
     <form>
 
+        <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
+            <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
+                <font color='#FFFFFF'> Banco PHP</font>
+            </h1>
+            <button type="button" onclick="location.href='home.php' "> Inicio</button>
+            <button type="button" onclick="location.href='historial.php' "> Historial de Credenciales</button>
+            <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
+            <button type="button" onclick="location.href='salir.php' "> Salir</button>
+
         <?php
         session_start();
 
@@ -38,7 +47,7 @@ include 'conexion.php';
 
             session_destroy();
 
-            echo "<strong>La Sesion de Usuario Expiró su Tiempo</strong><br/><br/>
+            echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
             <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
             <button type='button' name='volver'><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
         } else
@@ -56,45 +65,26 @@ include 'conexion.php';
 
             $data = mysqli_fetch_array($sql);
 
-            $sql2 = mysqli_query($conexion, "SELECT 
-                    persona.codigo_credencial,
-                    empresa.logo,
-                    empresa.nombre,
-                    credencial.tipo,
-                    credencial.codigo,
-                    credencial.fecha_valida_hasta
-                FROM persona
-                JOIN empresa
-                    ON persona.codigo_credencial = empresa.codigo_credencial 
-                JOIN credencial
-                    ON credencial.codigo = empresa.codigo_credencial
-                   
-                    AND
-                    credencial.codigo = persona.codigo_credencial");
-
-            $resultado = mysqli_fetch_array($sql2);
-        }
-
-        ?>
-
-        <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
-            <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
-                <font color='#FFFFFF'> Banco PHP</font>
-            </h1>
-            <button type="button" onclick="location.href='home.php' "> Inicio</button>
-            <button type="button" onclick="location.href='historial.php';"> Historial de Credenciales</button>
-            <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
-            <button type="button" onclick="location.href='salir.php' "> Salir</button>
+            echo "
             <h1 align='right'>
-                <font color='#FFFFFF'> <?php echo $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/> " ?></font>
+                <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
             </h1>
-        </header></br>
+            </header></br>
 
-        <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
+            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
 
-        <p align='center'><strong> Credenciales Válidas</strong></p><br>
+            <p align='center'><strong> Credenciales Válidas</strong></p><br>";
 
-        <table border='1' align='center' style='text-align: center; width: 40%'>
+
+            $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
+                                             WHERE CI_persona = CI
+                                             AND RUT_empresa = RUT
+                                             AND fecha_valida_hasta >= CURDATE()");
+
+
+            while ($resultado = mysqli_fetch_array($sql2)) {
+
+                echo "<table border='1' align='center' style='text-align: center; width: 40%'>
             <tr>
                 <th>Empresa Emisora</th>
                 <th>Nombre</th>
@@ -103,15 +93,18 @@ include 'conexion.php';
                 <th>Fecha Válida Hasta</th>
             </tr>
             <tr>
-                <td><img src="data:image/.jpg;base64, <?php echo base64_encode($resultado['logo']) ?>" width = '70px' height = '90px' /></td>
-                <td><?php echo $resultado['nombre'] ?></td>
-                <td><?php echo $resultado['tipo'] ?></td>
-                <td><?php echo $resultado['codigo'] ?></td>
-                <td><?php echo $resultado['fecha_valida_hasta'] ?></td>
+                <td><img src= data:image/.jpg;base64," . base64_encode($resultado['logo']) . " width = '90px' height = '90px' /></td>
+                <td>" . $resultado['nombre'] . "</td>
+                <td>" . $resultado['tipo'] . "</td>
+                <td>" . $resultado['codigo'] . "</td>
+                <td>" . $resultado['fecha_valida_hasta'] . "</td>
             </tr>
 
-        </table><br>
+            </table><br>";
+            }
+        }
 
+        ?>
 
     </form>
 </body>

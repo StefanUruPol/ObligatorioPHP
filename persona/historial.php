@@ -1,62 +1,6 @@
 <?php
 
 include 'conexion.php';
-session_start();
-
-if (!isset($_SESSION['start'])) {
-
-    //Set the session start time
-
-    $_SESSION['start'] = time();
-}
-
-//Check the session is expired or not
-
-if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
-
-    //Unset the session variables
-
-    session_unset();
-
-    //Destroy the session
-
-    session_destroy();
-
-    echo "<h2>La Sesion de Usuario Expiró su Tiempo</h2><br/><br/>
-    <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
-    <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
-} else
-    //echo "Sesion de Usuario Existente.<br/>";
-
-    $email = $_SESSION['email'];
-if (!isset($email)) {
-    header("login.php");
-} else {
-
-    $sql = mysqli_query($conexion, "SELECT * FROM persona
-          WHERE email = '$email'");
-
-    $row = mysqli_fetch_array($sql);
-
-    $sql2 = mysqli_query($conexion, "SELECT 
-                    persona.codigo_credencial,
-                    empresa.logo,
-                    empresa.nombre,
-                    credencial.tipo,
-                    credencial.codigo,
-                    credencial.fecha_valida_hasta
-                FROM persona
-                JOIN empresa
-                    ON persona.codigo_credencial = empresa.codigo_credencial 
-                JOIN credencial
-                    ON credencial.codigo = empresa.codigo_credencial
-                   
-                    AND
-                    credencial.codigo = persona.codigo_credencial");
-
-
-    $resultado = mysqli_fetch_array($sql2);
-}
 
 ?>
 
@@ -70,38 +14,93 @@ if (!isset($email)) {
 </head>
 
 <body>
-    <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
-        <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
-            <font color='#FFFFFF'> Banco PHP</font>
-        </h1>
-        <button type="button" onclick="location.href='home.php' "> Inicio</button>
-        <button type="button" onclick="location.href='historial.php';"> Historial de Credenciales</button>
-        <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
-        <button type="button" onclick="location.href='salir.php' "> Salir</button>
-        <h1 align="right">
-            <font color="#FFFFFF"><?php echo $row['primer_nombre'] . " " . $row['primer_apellido'] . " " ?><img src='data:image/.jpg;base64, <?php echo base64_encode($row['foto']) ?> ' width='70px' height='90px' /></font>
-        </h1>
-
-    </header></br>
     <form>
+        <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
+            <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
+                <font color='#FFFFFF'> Banco PHP</font>
+            </h1>
+            <button type="button" onclick="location.href='home.php' "> Inicio</button>
+            <button type="button" onclick="location.href='historial.php';"> Historial de Credenciales</button>
+            <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
+            <button type="button" onclick="location.href='salir.php' "> Salir</button>
 
-        <h2 align="center">Historial de Credenciales</h2><br>
+            <?php
 
-        <table border='1' align='center' style='text-align: center; width: 40%'>
-            <tr>
-                <th>Empresa Emisora</th>
-                <th>Tipo de Credencial</th>
-                <th>Código</th>
-                <th>Fecha Válida Hasta</th>
-            </tr>
-            <tr>
-                <td><?php echo $resultado['nombre'] ?></td>
-                <td><?php echo $resultado['tipo'] ?></td>
-                <td><?php echo $resultado['codigo'] ?></td>
-                <td><?php echo $resultado['fecha_valida_hasta'] ?></td>
-                <td><button type= "button" onclick= "location.href='detalle_credencial.php?codigo= <?php echo $resultado['codigo'] ?> ' "> Detalle de Credencial </td>
-            </tr>
-        </table><br>
+            session_start();
+
+            if (!isset($_SESSION['start'])) {
+
+                //Set the session start time
+
+                $_SESSION['start'] = time();
+            }
+
+            //Check the session is expired or not
+
+            if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+
+                //Unset the session variables
+
+                session_unset();
+
+                //Destroy the session
+
+                session_destroy();
+
+                echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
+            <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
+            <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+            } else
+                //echo "Sesion de Usuario Existente.<br/>";
+
+                $email = $_SESSION['email'];
+            if (!isset($email)) {
+                header("login.php");
+            } else {
+
+                $sql = mysqli_query($conexion, "SELECT * FROM persona
+            WHERE email = '$email'");
+
+                $data = mysqli_fetch_array($sql);
+
+                echo "
+            <h1 align='right'>
+                <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
+            </h1>
+            </header></br>
+
+            <h2 align='center'>Historial de Credenciales</h2><br>";
+
+            $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
+                                             WHERE CI_persona = CI
+                                             AND RUT_empresa = RUT
+                                             ORDER BY fecha_valida_hasta");
+
+
+            while ($resultado = mysqli_fetch_array($sql2)) {
+
+                echo "<table border='1' align='center' style='text-align: center; width: 40%'>
+                <tr>
+                    <th>Empresa Emisora</th>
+                    <th>Tipo de Credencial</th>
+                    <th>Código</th>
+                    <th>Fecha Válida Hasta</th>
+                </tr>
+                <tr>
+                <td>" . $resultado['nombre'] . "</td>
+                <td>" . $resultado['tipo'] . "</td>
+                <td>" . $resultado['codigo'] . "</td>
+                <td>" . $resultado['fecha_valida_hasta'] . "</td>
+                    <td><a href='detalle_credencial.php?codigo=" .$resultado['codigo']. " '> Detalle de Credencial </a></td>
+                </tr>
+            </table><br>";
+
+            }
+        }
+
+            ?>
+
+            
     </form>
 </body>
 

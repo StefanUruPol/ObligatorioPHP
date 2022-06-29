@@ -1,64 +1,6 @@
 <?php
 
 include 'conexion.php';
-session_start();
-
-if (!isset($_SESSION['start'])) {
-
-    //Set the session start time
-
-    $_SESSION['start'] = time();
-}
-
-//Check the session is expired or not
-
-if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
-
-    //Unset the session variables
-
-    session_unset();
-
-    //Destroy the session
-
-    session_destroy();
-
-    echo "<h2>La Sesion de Usuario Expiró su Tiempo</h2><br/><br/>
-    <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
-    <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
-} else
-    //echo "Sesion de Usuario Existente.<br/>";
-
-    $email = $_SESSION['email'];
-if (!isset($email)) {
-    header("login.php");
-} else {
-
-    $sql = mysqli_query($conexion, "SELECT * FROM persona
-          WHERE email = '$email'");
-
-    $row = mysqli_fetch_array($sql);
-
-
-    $sql2 = mysqli_query($conexion, "SELECT 
-                    persona.codigo_credencial,
-                    empresa.nombre,
-                    credencial.tipo,
-                    credencial.codigo,
-                    credencial.fecha_valida_desde,
-                    credencial.fecha_valida_hasta,
-                    credencial.PIN
-                FROM persona
-                JOIN empresa
-                    ON persona.codigo_credencial = empresa.codigo_credencial 
-                JOIN credencial
-                    ON credencial.codigo = empresa.codigo_credencial
-                   
-                    AND
-                    credencial.codigo = persona.codigo_credencial");
-
-
-    $data = mysqli_fetch_array($sql2);
-}
 
 ?>
 
@@ -80,38 +22,94 @@ if (!isset($email)) {
         <button type="button" onclick="location.href='historial.php';"> Historial de Credenciales</button>
         <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
         <button type="button" onclick="location.href='salir.php' "> Salir</button>
-        <h1 align="right">
-            <font color="#FFFFFF"><?php echo $row['primer_nombre'] . " " . $row['primer_apellido'] . " " ?><img src='data:image/.jpg;base64, <?php echo base64_encode($row['foto']) ?> ' width='70px' height='90px' /></font>
-        </h1>
 
+        <?php
+
+        session_start();
+
+        if (!isset($_SESSION['start'])) {
+
+            //Set the session start time
+
+            $_SESSION['start'] = time();
+        }
+
+        //Check the session is expired or not
+
+        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+
+            //Unset the session variables
+
+            session_unset();
+
+            //Destroy the session
+
+            session_destroy();
+
+            echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
+    <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
+    <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+        } else
+            //echo "Sesion de Usuario Existente.<br/>";
+
+            $email = $_SESSION['email'];
+        if (!isset($email)) {
+            header("login.php");
+        } else {
+
+            $sql = mysqli_query($conexion, "SELECT * FROM persona
+          WHERE email = '$email'");
+
+            $data = mysqli_fetch_array($sql);
+
+            echo "
+    <h1 align='right'>
+        <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
+    </h1>
     </header></br>
 
-    <h2 align="center">Detalle de Credencial</h2></br>
+    <h2 align='center'>Detalle de Credencial</h2></br>";
 
-    <fieldset align="center" style="width:450px; margin:auto;"></br>
+            $codigo = $_GET['codigo'];
+
+            $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
+                                             WHERE codigo = '$codigo'
+                                             AND CI_persona = CI
+                                             AND RUT_empresa = RUT
+                                             AND fecha_valida_hasta >= CURDATE()");
+
+
+            while ($resultado = mysqli_fetch_array($sql2)) {
+
+                echo "<fieldset align='center' style='width:450px; margin:auto;'></br>
 
         <form>
 
-            <label for="nombre">Empresa Emisora: </label>
-            <input type="text" name="nombre" placeholder="Ingrese Empresa Emisora" value="<?php echo $data['nombre'] ?>" required></br></br>
+            <label for='nombre'>Empresa Emisora: </label>
+            <input type='text' name='nombre' value=" . $resultado['nombre'] . " required></br></br>
 
-            <label for="direccion">Tipo de credencial: </label>
-            <input type="text" name="direccion" placeholder="Ingrese tipo de credencial" value="<?php echo $data['tipo'] ?>" required></br></br>
+            <label for='tipo'>Tipo de credencial: </label>
+            <input type='text' name='tipo' value=" . $resultado['tipo'] . " required></br></br>
 
-            <label for="telefono">Código: </label>
-            <input name="telefono" type="tel" pattern="([0-9]{4}(-[0-9]{4})(-[0-9]{4})(-[0-9]{4}))" placeholder="XXXX-XXXX-XXXX-XXXX" value="<?php echo $data['codigo'] ?>" required></br></br>
+            <label for='codigo'>Código: </label>
+            <input name='codigo' type='tel' pattern='([0-9]{4}(-[0-9]{4})(-[0-9]{4})(-[0-9]{4}))' placeholder='XXXX-XXXX-XXXX-XXXX' value=" . $resultado['codigo'] . " required></br></br>
 
-            <label for="email">Fecha válida desde: </label>
-            <input type="email" name="email" placeholder="Ingrese Fecha Válida Desde" size="21" value="<?php echo $data['fecha_valida_desde'] ?>" required></br></br>
+            <label for='fecha_desde'>Fecha válida desde: </label>
+            <input type='text' name='fecha_desde' size='21' value=" . $resultado['fecha_valida_desde'] . " required></br></br>
 
-            <label for="email">Fecha válida hasta: </label>
-            <input type="email" name="email" placeholder="Ingrese Fecha Válida Hasta" size="21" value="<?php echo $data['fecha_valida_hasta'] ?>" required></br></br>
+            <label for='fecha_hasta'>Fecha válida hasta: </label>
+            <input type='text' name='fecha_hasta' size='21' value=" . $resultado['fecha_valida_hasta'] . " required></br></br>
 
-            <label for="logo">PIN: </label>
-            <input name="pin" type="text" pattern="([0-9]{4})" placeholder="XXXX" value="<?php echo $data['PIN'] ?>" required></br></br>
+            <label for='pin'>PIN: </label>
+            <input name='pin' type='text' pattern='([0-9]{4})' value=" . $resultado['PIN'] . " required></br></br>
 
         </form>
-    </fieldset>
+    </fieldset>";
+            }
+        }
+
+        ?>
+
 </body>
 
 </html>
