@@ -18,6 +18,6 @@ if($array['contar'] > 0){
     header("location: home.php?") . $_SESSION['CI'];
 
 } else {?>
-    <?php include("login.php"); ?> <h1 align="center" class="bad">Usuario inválido</h1> <?php }
+    <?php include("login.php"); ?> <h2 align="center" class="bad">Usuario inválido</h2> <?php }
 
 ?>
