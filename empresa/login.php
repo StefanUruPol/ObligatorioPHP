@@ -28,7 +28,7 @@
       <button type="button" name="salir" onclick="location.href='/ObligatorioPHP/index.php'"> Inicio </button>
 
     </form>
-  </fieldset>
+  </fieldset><br/>
 </body>
 
 </html>
