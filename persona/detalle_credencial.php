@@ -70,11 +70,10 @@ include 'conexion.php';
 
     <h2 align='center'>Detalle de Credencial</h2></br>";
 
-            $codigo = $_GET['codigo'];
+            $codigo = $_GET['cod'];
 
             $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
-                                             WHERE codigo = '$codigo'
-                                             AND CI_persona = CI
+                                             WHERE CI_persona = CI
                                              AND RUT_empresa = RUT
                                              AND fecha_valida_hasta >= CURDATE()");
 

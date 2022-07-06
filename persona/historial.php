@@ -91,7 +91,7 @@ include 'conexion.php';
                 <td>" . $resultado['tipo'] . "</td>
                 <td>" . $resultado['codigo'] . "</td>
                 <td>" . $resultado['fecha_valida_hasta'] . "</td>
-                    <td><a href='detalle_credencial.php?codigo=" .$resultado['codigo']. " '> Detalle de Credencial </a></td>
+                    <td><a href='detalle_credencial.php?cod=" .$resultado['codigo']. " '> Detalle de Credencial </a></td>
                 </tr>
             </table><br>";
 

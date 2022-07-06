@@ -82,7 +82,7 @@ include 'conexion.php';
                                              AND fecha_valida_hasta >= CURDATE()");
 
 
-            while ($resultado = mysqli_fetch_array($sql2)) {
+            while($resultado = mysqli_fetch_array($sql2)){
 
                 echo "<table border='1' align='center' style='text-align: center; width: 40%'>
             <tr>
@@ -101,7 +101,9 @@ include 'conexion.php';
             </tr>
 
             </table><br>";
+
             }
+            
         }
 
         ?>
