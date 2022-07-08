@@ -116,60 +116,7 @@ include 'conexion.php';
               
                 
                 
-            //}
-
-<<<<<<< Updated upstream
-            while($resultado = mysqli_fetch_array($sql2)){
-=======
-            //}
-                            
-            //while($resultado = mysqli_fetch_array($sql2)) {
-            //$credencial = mysqli_fetch_array($sql2);
->>>>>>> Stashed changes
-
-            //if(empty($resultado)){
-              //  echo "No tiene credenciales validas";
-            //} else {
-
-             
-                
-                //$credencial = 0;
-
-                //if($credencial == $resultado) 
-
-                //echo "No tiene credenciales validas";
-
-                //elseif($credencial > $resultado) {
-
-               /* echo "<table border='1' align='center' style='text-align: center; width: 40%'>
-            <tr>
-                <th>Empresa Emisora</th>
-                <th>Nombre</th>
-                <th>Tipo de Credencial</th>
-                <th>Código</th>
-                <th>Fecha Válida Hasta</th>
-            </tr>
-            <tr>
-                <td><img src= data:image/.jpg;base64," . base64_encode($resultado['logo']) . " width = '90px' height = '90px' /></td>
-                <td>" . $resultado['nombre'] . "</td>
-                <td>" . $resultado['tipo'] . "</td>
-                <td>" . $resultado['codigo'] . "</td>
-                <td>" . $resultado['fecha_valida_hasta'] . "</td>
-            </tr>
-
-            </table><br>";
-<<<<<<< Updated upstream
-
-            }
             
-        }
-
-=======
-                }
-            
-            }
-        */
->>>>>>> Stashed changes
         ?>
 
     </form>
