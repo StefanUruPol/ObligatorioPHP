@@ -24,48 +24,52 @@ include 'conexion.php';
             <button type="button" onclick="location.href='perfil.php' "> Perfil</button>
             <button type="button" onclick="location.href='salir.php' "> Salir</button>
 
-        <?php
-        session_start();
+            <?php
+            session_start();
 
-        if (!isset($_SESSION['start'])) {
+            if (!isset($_SESSION['start'])) {
 
-            //Set the session start time
+                //Set the session start time
 
-            $_SESSION['start'] = time();
-        }
+                $_SESSION['start'] = time();
+            }
 
 
-        //Check the session is expired or not
+            //Check the session is expired or not
 
-        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+            if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
 
-            //Unset the session variables
+                //Unset the session variables
 
-            session_unset();
+                session_unset();
 
-            //Destroy the session
+                //Destroy the session
 
-            session_destroy();
+                session_destroy();
 
-            echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
-            <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
-            <button type='button' name='volver'><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
-        } else
+            ?> <h2>
+                    <font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font>
+                </h2><br /><br />
+                <button type="button" onclick="location.href='login.php'"> Volver a Iniciar Sesión</button>
+                <button type="button" onclick="location.href='/ObligatorioPHP/index.php'"> Salir</button>";
+            <?php
 
-            //echo "Sesion de Usuario Existente.<br/>";
+            } else
 
-            $email = $_SESSION['email'];
+                //echo "Sesion de Usuario Existente.<br/>";
 
-        if (!isset($email)) {
-            header("login.php");
-        } else {
+                $email = $_SESSION['email'];
 
-            $sql = mysqli_query($conexion, "SELECT * FROM persona
+            if (!isset($email)) {
+                header("login.php");
+            } else {
+
+                $sql = mysqli_query($conexion, "SELECT * FROM persona
                             WHERE email= '$email'");
 
-            $data = mysqli_fetch_array($sql);
+                $data = mysqli_fetch_array($sql);
 
-            echo "
+                echo "
             <h1 align='right'>
                 <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
             </h1>
@@ -74,8 +78,7 @@ include 'conexion.php';
             <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
 
             <p align='center'><strong> Credenciales Válidas</strong></p><br>";
-
-        }
+            }
 
             $sql2 = mysqli_query($conexion, "SELECT *
             FROM 
@@ -86,14 +89,17 @@ include 'conexion.php';
             AND credencial.fecha_valida_hasta >= CURDATE()
             
             ");
-            
-            
-            
-            while($resultado = mysqli_fetch_array($sql2)) {
 
-                if(empty($resultado)) 
-            echo "No tiene credenciales validas";
-            
+            $resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC);
+            if(!$resultado) {
+                die('No hay credenciales validas! ');
+            }
+
+           //while ($resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC)) {
+                    
+                
+            do{      
+                
                 echo "<table border='1' align='center' style='text-align: center; width: 40%'>
             <tr>
                 <th>Empresa Emisora</th>
@@ -111,12 +117,11 @@ include 'conexion.php';
             </tr>
 
             </table><br>";
-                }
+           
+                } while($resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC));
+                 
                 
-              
-                
-                
-            
+                mysqli_close($conexion);
         ?>
 
     </form>

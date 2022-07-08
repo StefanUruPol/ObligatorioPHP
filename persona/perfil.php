@@ -15,9 +15,13 @@ if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
 
     session_destroy();
 
-    echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
-    <button type='button' name='volver'><a href='login.php'> Volver a Iniciar Sesión </a></button>
-    <button type='button' name='volver'><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+?> <h2>
+        <font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font>
+    </h2><br /><br />
+    <button type="button" onclick="location.href='login.php'"> Volver a Iniciar Sesión</button>
+    <button type="button" onclick="location.href='/ObligatorioPHP/index.php'"> Salir</button>";
+<?php
+
 } else {
     //echo "Sesion de Usuario Existente.<br/>";
 }
