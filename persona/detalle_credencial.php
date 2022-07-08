@@ -75,7 +75,7 @@ include 'conexion.php';
             $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
                                              WHERE CI_persona = CI
                                              AND RUT_empresa = RUT
-                                             AND fecha_valida_hasta >= CURDATE()");
+                                             ");
 
 
             while ($resultado = mysqli_fetch_array($sql2)) {

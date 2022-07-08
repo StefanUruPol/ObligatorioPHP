@@ -71,10 +71,13 @@ include 'conexion.php';
 
             <h2 align='center'>Historial de Credenciales</h2><br>";
 
-            $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
-                                             WHERE CI_persona = CI
-                                             AND RUT_empresa = RUT
-                                             ORDER BY fecha_valida_hasta");
+            $sql2 = mysqli_query($conexion, "SELECT *
+                                            FROM 
+                                            credencial 
+                                    INNER JOIN empresa ON credencial.RUT_empresa = empresa.RUT
+                                    INNER JOIN persona ON credencial.CI_persona = persona.CI
+                                    WHERE persona.email = '$email'
+                                    ORDER BY fecha_valida_hasta DESC");
 
 
             while ($resultado = mysqli_fetch_array($sql2)) {
