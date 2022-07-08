@@ -98,13 +98,19 @@ include 'conexion.php';
                 <td>" . $resultado['nombre'] . "</td>
                 <td>" . $resultado['tipo'] . "</td>
                 <td>" . $resultado['codigo'] . "</td>
-                <td>" . $resultado['fecha_valida_hasta'] . "</td>
+                <td>" . $resultado['fecha_valida_hasta'] .  "</td>
                     <td><a href='detalle_credencial.php?cod=" . $resultado['codigo'] . " '> Detalle de Credencial </a></td>
                 </tr>
             </table><br>";
-                }
+               // }
             }
-
+            $fecha = date("Y-m-d");
+            if($resultado['fecha_valida_hasta'] >= $fecha)
+            echo "Credencial valida";
+            else
+            echo "Credencial invalida";
+        }
+            
             ?>
 
 
