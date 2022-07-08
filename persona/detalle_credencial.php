@@ -46,9 +46,13 @@ include 'conexion.php';
 
             session_destroy();
 
-            echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
-    <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
-    <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+        ?> <h2>
+                <font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font>
+            </h2><br /><br />
+            <button type="button" onclick="location.href='login.php'"> Volver a Iniciar Sesión</button>
+            <button type="button" onclick="location.href='/ObligatorioPHP/index.php'"> Salir</button>";
+        <?php
+
         } else
             //echo "Sesion de Usuario Existente.<br/>";
 
@@ -62,25 +66,23 @@ include 'conexion.php';
 
             $data = mysqli_fetch_array($sql);
 
-            echo "
-    <h1 align='right'>
-        <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
-    </h1>
-    </header></br>
+            echo "<h1 align='right'>
+            <font color='#FFFFFF'>" . $data['primer_nombre'] . " " . $data['primer_apellido'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['foto']) . " width = '70px' height = '90px'/></font>
+            </h1>
+            </header></br>
 
-    <h2 align='center'>Detalle de Credencial</h2></br>";
+            <h2 align='center'>Detalle de Credencial</h2></br>";
 
             $codigo = $_GET['cod'];
 
             $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
-                                             WHERE CI_persona = CI
-                                             AND RUT_empresa = RUT
-                                             ");
+                                             WHERE codigo = '$codigo'
+                                             AND RUT_empresa = RUT");
 
 
-            while ($resultado = mysqli_fetch_array($sql2)) {
+            $resultado = mysqli_fetch_array($sql2);
 
-                echo "<fieldset align='center' style='width:450px; margin:auto;'></br>
+            echo "<fieldset align='center' style='width:450px; margin:auto;'></br>
 
         <form>
 
@@ -104,7 +106,6 @@ include 'conexion.php';
 
         </form>
     </fieldset>";
-            }
         }
 
         ?>

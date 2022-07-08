@@ -47,9 +47,14 @@ include 'conexion.php';
 
                 session_destroy();
 
-                echo "<h2><font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font></h2><br/><br/>
-            <button><a href='login.php'> Volver a Iniciar Sesión </a></button>
-            <button><a href='/ObligatorioPHP/index.php'> Salir </a></button>";
+            ?> <h2>
+                    <font color='#FFFFFF'>La Sesion de Usuario Expiró su Tiempo</font>
+                </h2><br /><br />
+                <button type="button" onclick="location.href='login.php'"> Volver a Iniciar Sesión</button>
+                <button type="button" onclick="location.href='/ObligatorioPHP/index.php'"> Salir</button>";
+            <?php
+
+
             } else
                 //echo "Sesion de Usuario Existente.<br/>";
 
@@ -71,7 +76,7 @@ include 'conexion.php';
 
             <h2 align='center'>Historial de Credenciales</h2><br>";
 
-            $sql2 = mysqli_query($conexion, "SELECT *
+                $sql2 = mysqli_query($conexion, "SELECT *
                                             FROM 
                                             credencial 
                                     INNER JOIN empresa ON credencial.RUT_empresa = empresa.RUT
@@ -80,9 +85,9 @@ include 'conexion.php';
                                     ORDER BY fecha_valida_hasta DESC");
 
 
-            while ($resultado = mysqli_fetch_array($sql2)) {
+                while ($resultado = mysqli_fetch_array($sql2)) {
 
-                echo "<table border='1' align='center' style='text-align: center; width: 40%'>
+                    echo "<table border='1' align='center' style='text-align: center; width: 40%'>
                 <tr>
                     <th>Empresa Emisora</th>
                     <th>Tipo de Credencial</th>
@@ -94,16 +99,15 @@ include 'conexion.php';
                 <td>" . $resultado['tipo'] . "</td>
                 <td>" . $resultado['codigo'] . "</td>
                 <td>" . $resultado['fecha_valida_hasta'] . "</td>
-                    <td><a href='detalle_credencial.php?cod=" .$resultado['codigo']. " '> Detalle de Credencial </a></td>
+                    <td><a href='detalle_credencial.php?cod=" . $resultado['codigo'] . " '> Detalle de Credencial </a></td>
                 </tr>
             </table><br>";
-
+                }
             }
-        }
 
             ?>
 
-            
+
     </form>
 </body>
 
