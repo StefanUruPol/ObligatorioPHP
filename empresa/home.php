@@ -59,7 +59,7 @@ include 'conexion.php';
             <img src = data:image/.jpg;base64," . base64_encode($data['logo']) . " width = '70px' height = '100px'/><br><br>
 
             <a href='home.php'> Inicio </a><br>
-            <a href='asignacion.php'> Asignación de Credenciales </a><br>
+            <a href='asignar.php'> Asignación de Credenciales </a><br>
             <a href='historial.php'> Historial de Credenciales </a><br>
             <a href='perfil.php'> Perfil </a><br>
             <a href='salir.php'> Salir </a>";

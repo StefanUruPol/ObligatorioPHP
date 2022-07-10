@@ -114,11 +114,11 @@ include 'conexion.php';
                     if ($resultado['fecha_valida_hasta'] >= $fecha) {
                         echo "
                         <div class='alert alert-success d-flex align-items-center' role='alert'>
-                        <svg class='bi flex-shrink-0 me-2' width='34' height='24' role='img' aria-label='Info:'Success:'><use xlink:href='#check-circle-fill'/></svg>
-                        <div>
-                            Credencial Válida
-                        </div>
-                    </div>";
+                            <svg class='bi flex-shrink-0 me-2' width='34' height='24' role='img' aria-label='Info:'Success:'><use xlink:href='#check-circle-fill'/></svg>
+                            <div>
+                                Credencial Válida
+                            </div>
+                        </div>";
                     } else {
                         echo "
                         <div class='alert alert-danger d-flex align-items-center' role='alert'>
