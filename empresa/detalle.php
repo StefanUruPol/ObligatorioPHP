@@ -25,7 +25,6 @@ include 'conexion.php';
         <button type="button" onclick="location.href='salir.php' "> Salir</button>
 
         <?php
-
         session_start();
 
         if (!isset($_SESSION['start'])) {
