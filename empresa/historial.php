@@ -50,7 +50,7 @@ include 'conexion.php';
 
             //Check the session is expired or not
 
-            if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+            if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 60)) {
 
                 //Unset the session variables
 

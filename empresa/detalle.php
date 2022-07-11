@@ -37,7 +37,7 @@ include 'conexion.php';
 
         //Check the session is expired or not
 
-        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 10)) {
+        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 60 * 60)) {
 
             //Unset the session variables
 
@@ -76,9 +76,12 @@ include 'conexion.php';
 
             $codigo = $_GET['cod'];
 
-            $sql2 = mysqli_query($conexion, "SELECT * FROM persona, empresa, credencial
-                                             WHERE codigo = '$codigo'
-                                             AND RUT_empresa = RUT");
+            $sql2 = mysqli_query($conexion, "SELECT *
+                                            FROM 
+                                            credencial 
+                                    INNER JOIN empresa ON credencial.RUT_empresa = empresa.RUT
+                                    INNER JOIN persona ON credencial.CI_persona = persona.CI
+                                    WHERE empresa.email = '$email'");
 
 
             $resultado = mysqli_fetch_array($sql2);
@@ -93,8 +96,8 @@ include 'conexion.php';
             <label for='ci'>CI: </label>
             <input name='ci' type='tel' pattern='([0-9]{8})' placeholder='12345678' value=" . $resultado['CI'] . " required></br></br>
 
-            <label for='nombre'>Apellido: </label>
-            <input type='text' name='nombre' value=" . $resultado['primer_apellido'] . " required></br></br>
+            <label for='apellido'>Apellido: </label>
+            <textarea name='apellido' placeholder='Ingrese su Apellido' rows='1' required> " . $resultado['primer_apellido'] . "</textarea></br></br>
 
             <label for='nombre'>Nombre: </label>
             <input type='text' name='nombre' value=" . $resultado['primer_nombre'] . " required></br></br>
@@ -111,8 +114,8 @@ include 'conexion.php';
             <label for='pin'>PIN: </label>
             <input name='pin' type='text' pattern='([0-9]{4})' value=" . $resultado['PIN'] . " required></br></br>
 
-            <label for='asignacion'>Fecha válida desde: </label>
-            <input type='text' name='asignacion' size='21' value=" . $resultado['fecha_y_hora'] . " required></br></br>
+            <label for='asignacion'>Fecha y Hora: </label>
+            <textarea name='asignacion' placeholder='Ingrese su Fecha y Hora de Asignación' rows='1' required> " . $resultado['fecha_y_hora'] . "</textarea></br></br>
 
         </form>
     </fieldset>";
