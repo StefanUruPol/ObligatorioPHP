@@ -5,19 +5,24 @@
 
     <title>Banco PHP - Registrar Usuario</title>
     <meta htpp-equiv="Refresh" content="10" charset="UTF-8">
-
+    <link href="/ObligatorioPHP/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
-<body align="center">
+<body>
+    <header style=" padding: 3px;background-color: #001a57;"><br />
+        <h1 align="center"><img src="WampServer-logo.png" width='90px' height='90px' />
+            <font color="#FFFFFF"> Banco PHP</font>
+        </h1><br />
+    </header></br>
 
-    <h1>Registrar Usuario</h1>
+    <h2 align="center">Registrar Usuario</h2>
 
-    <fieldset style="width:450px; margin:auto;"></br>
+    <fieldset align="center" style="width:450px; margin:auto;"></br>
 
         <form method="post" action="" enctype="multipart/form-data">
 
             <label for="ci">Cédula de Identidad: </label>
-            <input type="text" name="ci" pattern="[0-9]+" placeholder="12345678" required></br></br>
+            <input type="text" name="ci" pattern="([0-9]{8})" placeholder="12345678" required></br></br>
 
             <label for="nombre">Primer Nombre: </label>
             <input type="text" name="primerNombre" placeholder="Ingrese su Primer Nombre" required></br></br>
@@ -58,12 +63,12 @@
                 $date = $_POST['fechaDeNacimiento'];
                 $correo = $_POST['email'];
                 $contrasenia = md5($_POST['password']);
-                $photo= addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+                $photo = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
 
                 $query = "INSERT INTO persona (CI, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_de_nacimiento, email, foto, password)
                         VALUES ('$cedula', '$firstName', '$secondName', '$firstSurname', '$secondSurname', '$date', '$correo', '$photo', '$contrasenia')";
 
-                $resultado = $conexion->query ($query);
+                $resultado = $conexion->query($query);
 
                 if ($resultado) {
                     echo "<p style=' text-align: center'><strong> Se Agrego Correctamente una Nuevo Usuario </strong></p></br>";
@@ -75,7 +80,7 @@
             ?>
 
             <input type="submit" name="registrar" value="Registrar usuario">
-            <button type="button" name="volver"><a href="login.php"> Volver </a></button>
+            <button type="button" name="volver" onclick="location.href='login.php'"> Volver</button>
 
         </form>
     </fieldset>

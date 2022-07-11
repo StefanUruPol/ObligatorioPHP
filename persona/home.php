@@ -14,7 +14,6 @@ include 'conexion.php';
 
 <body>
     <form>
-
         <header class='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom' style=' padding: 3px;background-color: #001a57;'>
             <h1 align='center'><img src='WampServer-logo.png' width='90px' height='90px' />
                 <font color='#FFFFFF'> Banco PHP</font>

@@ -5,19 +5,24 @@
 
     <title>Banco PHP - Registrar Usuario</title>
     <meta htpp-equiv="Refresh" content="10" charset="UTF-8">
-
+    <link href="/ObligatorioPHP/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
-<body align="center">
+<body>
+    <header style=" padding: 3px;background-color: #001a57;"><br />
+        <h1 align="center"><img src="WampServer-logo.png" width='90px' height='90px' />
+            <font color="#FFFFFF"> Banco PHP</font>
+        </h1><br />
+    </header></br>
 
-    <h1>Registrar Usuario</h1>
+    <h2 align="center">Registrar Usuario</h2>
 
-    <fieldset style="width:450px; margin:auto;"></br>
+    <fieldset align="center" style="width:450px; margin:auto;"></br>
 
         <form method="post" action="" enctype="multipart/form-data">
 
             <label for="rut">RUT: </label>
-            <input type="text" name="rut" pattern="[0-9]+" placeholder="XXXXXXXXXXXX" required></br></br>
+            <input type="text" name="rut" pattern="([0-9]{12})" placeholder="12 dígitos numéricos" required></br></br>
 
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" placeholder="Ingrese su Nombre" required></br></br>
@@ -67,7 +72,7 @@
             ?>
 
             <input type="submit" name="registrar" value="Registrar usuario">
-            <button type="button" name="volver"><a href="login.php"> Volver </a></button>
+            <button type="button" name="volver" onclick="location.href='login.php'"> Volver</button>
 
         </form>
     </fieldset>
