@@ -98,7 +98,7 @@ include 'conexion.php';
             <input type='email' name='email' size='25' placeholder='Ingrese su Dirección de Correo' size='25' value=" . $data['email'] . " required></br></br>
 
             <label for='foto'>Logo: </label>
-            <img src='data:image/.jpg;base64," . base64_encode($data['logo']) . "' width='100px' height='130px' /><br><br>
+            <img src='data:image/.jpg;base64," . base64_encode($data['logo']) . "' width='130px' height='130px' /><br><br>
 
         </form>
     </fieldset>";
