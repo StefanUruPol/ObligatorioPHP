@@ -141,14 +141,29 @@ include 'conexion.php';
         $persona = $_POST['ci'];
         $empresa = $_POST['rut'];
 
-        $query = mysqli_query($conexion, "INSERT INTO credencial (tipo, codigo, fecha_valida_desde, fecha_valida_hasta, PIN, fecha_y_hora, CI_persona, RUT_empresa)
+        $query = "SELECT COUNT(*) as contar FROM credencial  
+                WHERE CI_persona = '$persona' 
+                AND tipo = '$tipo'
+                AND fecha_valida_hasta >= '$desde'";
+
+
+        $consulta = mysqli_query($conexion, $query);
+        $array = mysqli_fetch_array($consulta);
+
+
+        if($array['contar'] > 0){
+            echo "Ya cuenta con una credencial de este tipo";
+        }else{
+
+            $query2 = mysqli_query($conexion, "INSERT INTO credencial (tipo, codigo, fecha_valida_desde, fecha_valida_hasta, PIN, fecha_y_hora, CI_persona, RUT_empresa)
                 VALUES ('$tipo', '$cod', '$desde', '$hasta', '$pin', '$dateAndTime', '$persona', '$empresa')");
 
-        if($query) {
-            echo "<p style=' text-align: center'><strong> Se asignó correctamente una nueva Credencial</strong></p></br>";
+            if($query2) {
+                echo "<p style=' text-align: center'><strong> Se asignó correctamente una nueva Credencial</strong></p></br>";
+            }
         }
     }
-    ?>   
+        ?>   
             
             <button type='button' name='volver' onclick="location.href='home.php'"> Volver</button>
         </form>
