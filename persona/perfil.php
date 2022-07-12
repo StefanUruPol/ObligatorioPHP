@@ -81,32 +81,67 @@ include 'conexion.php';
         <form method='post' action='' enctype='multipart/form-data' align='center'>
 
             <label for='ci'>Cédula de Identidad: </label>
-            <input type='text' name='ci' pattern='([0-9]{8})' placeholder='12345678' value=" . $data['CI'] . " required></br></br>
+            <input type='text' name='ci' pattern='([0-9]{7})' placeholder='12345678' value=" . $data['CI'] . " ></br></br>
 
             <label for='nombre'>Primer Nombre: </label>
-            <input type='text' name='primerNombre' size='25' placeholder='Ingrese su Primer Nombre' value=" . $data['primer_nombre'] . " required></br></br>
+            <input type='text' name='primerNombre' size='25' placeholder='Ingrese su Primer Nombre' value=" . $data['primer_nombre'] . " ></br></br>
 
             <label for='nombre2'>Segundo Nombre: </label>
             <input type='text' name='segundoNombre' size='25' value=" . $data['segundo_nombre'] . "></br></br>
 
             <label for='apellido'>Primer Apellido: </label>
-            <textarea name='primerApellido' placeholder='Ingrese su Primer Apellido' rows='1' cols='25' required> " . $data['primer_apellido'] . " </textarea></br></br>
+            <textarea name='primerApellido' placeholder='Ingrese su Primer Apellido' rows='1' cols='25'> " . $data['primer_apellido'] . " </textarea></br></br>
 
             <label for='apellido2'>Segundo Apellido: </label>
-            <input type='text' name='segundoApellido' size='25' placeholder='Ingrese su Segundo Apellido' value=" . $data['segundo_apellido'] . " required></br></br>
+            <input type='text' name='segundoApellido' size='25' placeholder='Ingrese su Segundo Apellido' value=" . $data['segundo_apellido'] . " ></br></br>
 
             <label for='fecha'>Fecha de Nacimiento: </label>
-            <input type='text' name='fechaDeNacimiento' value=" . $data['fecha_de_nacimiento'] . " required></br></br>
+            <input type='text' name='fechaDeNacimiento' value=" . $data['fecha_de_nacimiento'] . " ></br></br>
 
             <label for='email'>Email: </label>
-            <input type='email' name='email' size='25' placeholder='Ingrese su Dirección de Correo' size='25' value=" . $data['email'] . " required></br></br>
+            <input type='email' name='email' size='25' placeholder='Ingrese su Dirección de Correo' size='25' value=" . $data['email'] . " ></br></br>
+
+            <label for='password'>Password: </label>
+            <input type='password' name='password' placeholder='Ingrese Contraseña' value=" . $data['password'] . " /><br /><br />
 
             <label for='foto'>Foto de Usuario: </label>
             <img src='data:image/.jpg;base64," . base64_encode($data['foto']) . "' width='100px' height='130px' /><br><br>
+            <input type='file' name='foto' size='75' ></br></br>
+
+            <input type='submit' name='editar' value='Editar Perfil'>
 
         </form>
     </fieldset>";
+
+            if (isset($_POST['editar'])) {
+
+                $primer_nombre = $_POST['primerNombre'];
+                $segundo_nombre = $_POST['segundoNombre'];
+                $primer_apellido = $_POST['primerApellido'];
+                $segundo_apellido = $_POST['segundoApellido'];
+                $fecha = $_POST['fechaDeNacimiento'];
+                $password = md5($_POST['password']);
+                $foto = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+
+
+                $sql = mysqli_query($conexion, "UPDATE persona 
+                SET primer_nombre= '$primer_nombre', segundo_nombre= '$segundo_nombre',
+                primer_apellido= '$primer_apellido', segundo_apellido= '$segundo_apellido',
+                fecha_de_nacimiento= '$fecha',
+                foto= '$foto', password= '$password'
+                WHERE email = '$email'");
+
+
+
+                if ($sql) {
+                    echo "<p style=' text-align: center'><strong>Registro guardado</strong></p>";
+                }else{
+                    die(mysqli_error($conexion));
+                }	  
+            }
         }
+
+        mysqli_close($conexion);
         ?>
 </body>
 
