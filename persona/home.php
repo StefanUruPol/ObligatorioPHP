@@ -74,9 +74,7 @@ include 'conexion.php';
             </h1>
             </header></br>
 
-            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
-
-            <p align='center'><strong> Credenciales Válidas</strong></p><br>";
+            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>";
             }
 
             $sql2 = mysqli_query($conexion, "SELECT *
@@ -91,7 +89,7 @@ include 'conexion.php';
 
             $resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC);
             if(!$resultado) {
-                die('No hay credenciales validas! ');
+                die("<p align='center'><strong> No hay credenciales validas!</strong></p>");
             }
 
            //while ($resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC)) {
@@ -99,7 +97,9 @@ include 'conexion.php';
                 
             do{      
                 
-                echo "<table border='1' align='center' style='text-align: center; width: 40%'>
+                echo "<p align='center'><strong> Credenciales Válidas</strong></p><br>
+
+                <table border='1' align='center' style='text-align: center; width: 40%'>
             <tr>
                 <th>Empresa Emisora</th>
                 <th>Nombre</th>

@@ -74,9 +74,7 @@ include 'conexion.php';
                 </h1>
         </header></br>
 
-            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
-
-            <p align='center'><strong> Credenciales Válidas</strong></p><br>";
+            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>";
             
             }
 
@@ -91,12 +89,14 @@ include 'conexion.php';
             $resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC);
 
             if(!$resultado) {
-                die('No hay Credenciales emitidas por esta Empresa! ');
+                die("<p align='center'><strong>No hay Credenciales emitidas por esta Empresa!</strong></p> ");
             }
                           
             do{      
                 
-                echo "<table border='1' align='center' style='text-align: center; width: 60%'>
+                echo "<p align='center'><strong> Credenciales Válidas</strong></p><br>
+
+                <table border='1' align='center' style='text-align: center; width: 60%'>
             <tr>
                 <th>Tipo de Credencial</th>
                 <th>Foto</th>

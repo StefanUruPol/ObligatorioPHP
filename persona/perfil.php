@@ -81,7 +81,7 @@ include 'conexion.php';
         <form method='post' action='' enctype='multipart/form-data' align='center'>
 
             <label for='ci'>Cédula de Identidad: </label>
-            <input type='text' name='ci' pattern='([0-9]{7})' placeholder='12345678' value=" . $data['CI'] . " ></br></br>
+            <input type='text' name='ci' pattern='([0-9]{8})' placeholder='12345678' value=" . $data['CI'] . " ></br></br>
 
             <label for='nombre'>Primer Nombre: </label>
             <input type='text' name='primerNombre' size='25' placeholder='Ingrese su Primer Nombre' value=" . $data['primer_nombre'] . " ></br></br>
