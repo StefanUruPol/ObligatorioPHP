@@ -70,85 +70,34 @@ include 'conexion.php';
             <font color='#FFFFFF'>" . $data['nombre'] . " " . "<img src = data:image/.jpg;base64," . base64_encode($data['logo']) . " width = '90px' height = '90px'/></font>
             </h1>
     </header></br>
+        <form method='post' action='' align='center'>
 
             <h2 align='center'>Asignación de Credencial</h2></br></br>";
 
-            $sql2 = mysqli_query($conexion, "SELECT * FROM credencial, persona");
+            $sql2 = mysqli_query($conexion, "SELECT * FROM persona");
 
-
-            $resultado = mysqli_fetch_array($sql2);
-
-            do {
+            while($resultado = mysqli_fetch_array($sql2)){
                 echo "<table border='1' align='center' style='text-align: center; width: 30%'>
             <tr>
-                <th> </th> 
                 <th>Nombre</th> 
                 <th>Email</th>
             </tr>
             <tr>
-                <td><input type='radio' name='radio' value=" . $resultado['CI'] . "></td>
                 <td>" . $resultado['primer_nombre'] . "</td>
                 <td>" . $resultado['email'] . "</td>
+                <td><a href='asignacion.php?id=" . $resultado['email']. "'> Asignar</a></td>
             </tr>
 
-            </table><br>";
-            } while ($resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC));
+            </table><br>
+            </form>";
+            
+            }
 
-            echo "</br>
-            <form align='center'>
-            <label for='tipo'>Tipo de credencial: </label>
-            <select name='tipo' required>
-                <option value=''></option>
-                <option value='bronze' >Bronze</option>
-                <option value='premium'>Premium</option>
-	            <option value='vip'>VIP</option>
-	            <option value='silver'>Silver</option>
-	            <option value='gold'>Gold</option>
-	            <option value='platinum'>Platinum</option>
-	            <option value='diamond'>Diamond</option>
-            </select></br></br>
-
-            <label for='codigo'>Código: </label>
-            <input name='codigo' type='tel' pattern='([0-9]{4}(-[0-9]{4})(-[0-9]{4})(-[0-9]{4}))' placeholder='XXXX-XXXX-XXXX-XXXX' value='' required></br></br>
-
-            <label for='fecha_desde'>Fecha válida desde: </label>
-            <input type='date' name='fecha_desde' size='21' value='' required></br></br>
-
-            <label for='fecha_hasta'>Fecha válida hasta: </label>
-            <input type='date' name='fecha_hasta' size='21' value='' required></br></br>
-
-            <label for='pin'>PIN: </label>
-            <input name='pin' type='text' pattern='([0-9]{4})' value='' required></br></br></br>";
-
-            if (isset($_POST['asignar'])) {
-
-                $tipo = $_POST['tipo'];
-                $cod = $_POST['codigo'];
-                $desde = $_POST['fecha_desde'];
-                $hasta = $_POST['fecha_hasta'];
-                $pin = $_POST['pin'];
-
-                $query = "INSERT INTO credencial (tipo, codigo, fecha_valida_desde, fecha_valida_hasta, PIN)
-                        VALUES ('$tipo', '$cod', '$desde', '$hasta', '$pin')";
-
-                $consulta = mysqli_query($conexion, $query);
-
-                $data = mysqli_fetch_array($consulta);
-
-                if ($data) {
-                    echo "<p style=' text-align: center'><strong> Se asignó correctamente una nueva Credencial</strong></p></br>";
-                } else {
-                    die(mysqli_error($conexion));
-                }
-            } 
         }
+        mysqli_close($conexion);
 
         ?>
 
-        <input type="submit" name="asignar" value="Asignar Credencial">
-        <button type="button" name="volver" onclick="location.href='home.php'"> Volver</button>
-
-        </form>
 </body>
 
 </html>

@@ -87,7 +87,7 @@ include 'conexion.php';
         <form>
 
             <label for='nombre'>Empresa Emisora: </label>
-            <input type='text' name='nombre' value=" . $resultado['nombre'] . " required></br></br>
+            <textarea name='nombre' placeholder='Ingrese Nombre de Empresa' rows='1' cols='25' required> " . $resultado['nombre'] . " </textarea></br></br>
 
             <label for='tipo'>Tipo de credencial: </label>
             <input type='text' name='tipo' value=" . $resultado['tipo'] . " required></br></br>
