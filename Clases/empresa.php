@@ -1,5 +1,5 @@
 <?php
-    class empresa extends usuario {
+    class empresa  {
         private $rut;
         private $nombre;
         private $direccion;

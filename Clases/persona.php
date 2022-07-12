@@ -1,5 +1,5 @@
 <?php
-    class persona extends usuario {
+    class persona {
         private $ci;
         private $primer_nombre;
         private $segundo_nombre;
