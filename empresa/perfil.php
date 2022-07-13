@@ -83,7 +83,7 @@ include 'conexion.php';
         <form method='post' action='' enctype='multipart/form-data' align='center'>
 
             <label for='rut'>RUT: </label>
-            <input type='text' name='ci' pattern='([0-9]{12})' placeholder='12 dígitos numéricos' value=" . $data['RUT'] . " required></br></br>
+            <input type='text' name='ci' pattern='([0-9]{9}[0-9]{3})' placeholder='12 dígitos numéricos' value=" . $data['RUT'] . " required></br></br>
 
             <label for='nombre'>Nombre: </label>
             <textarea name='nombre' placeholder='Ingrese su Nombre' rows='1' cols='25' required> " . $data['nombre'] . " </textarea></br></br>
@@ -100,24 +100,24 @@ include 'conexion.php';
             <label for='foto'>Logo: </label>
             <img src='data:image/.jpg;base64," . base64_encode($data['logo']) . "' width='130px' height='130px' /><br><br>
 
+            <input type='submit' name='editar' value='Editar Perfil'>
+
+
         </form>
     </fieldset>";
     if (isset($_POST['editar'])) {
 
-        $primer_nombre = $_POST['primerNombre'];
-        $segundo_nombre = $_POST['segundoNombre'];
-        $primer_apellido = $_POST['primerApellido'];
-        $segundo_apellido = $_POST['segundoApellido'];
-        $fecha = $_POST['fechaDeNacimiento'];
+        $nombre = $_POST['nombre'];
+        $direccion = $_POST['direccion'];
+        $telefono = $_POST['telefono'];;
         $password = md5($_POST['password']);
-        $foto = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+        $logo = addslashes(file_get_contents($_FILES['logo']['tmp_name']));
 
 
-        $sql2 = mysqli_query($conexion, "UPDATE persona 
-        SET primer_nombre= '$primer_nombre', segundo_nombre= '$segundo_nombre',
-        primer_apellido= '$primer_apellido', segundo_apellido= '$segundo_apellido',
-        fecha_de_nacimiento= '$fecha',
-        foto= '$foto', password= '$password'
+        $sql2 = mysqli_query($conexion, "UPDATE empresa 
+        SET nombre= '$primer_nombre', direccion= '$direccion',
+        telefono= '$telefono',
+        logo= '$foto', password= '$password'
         WHERE email = '$email'");
 
 

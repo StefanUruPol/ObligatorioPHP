@@ -22,7 +22,7 @@
         <form method="post" action="" enctype="multipart/form-data">
 
             <label for="rut">RUT: </label>
-            <input type="text" name="rut" pattern="([0-9]{12})" placeholder="12 dígitos numéricos" required></br></br>
+            <input type="text" name="rut" pattern="([0-9]{9}[0-9]{3})" placeholder="12 dígitos numéricos" required></br></br>
 
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" placeholder="Ingrese su Nombre" required></br></br>
@@ -55,10 +55,10 @@
                 $tel = $_POST['telefono'];
                 $logo = addslashes(file_get_contents($_FILES['logo']['tmp_name']));
                 $correo = $_POST['email'];
-                $contrasenia = md5($_POST['password']);
+                $password = md5($_POST['password']);
 
                 $query = "INSERT INTO empresa (RUT, nombre, direccion, telefono, logo, email, password)
-                        VALUES ('$rut', '$name', '$dir', '$tel', '$logo', '$correo', '$contrasenia')";
+                        VALUES ('$rut', '$name', '$dir', '$tel', '$logo', '$correo', '$password')";
 
                 $resultado = $conexion->query($query);
 

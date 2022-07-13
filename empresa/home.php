@@ -74,7 +74,9 @@ include 'conexion.php';
                 </h1>
         </header></br>
 
-            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>";
+            <h2 align='center'><strong> BIENVENIDO</strong></h2><br><br>
+            
+            <p align='center'><strong> Credenciales Válidas</strong></p><br>";
             
             }
 
@@ -94,8 +96,7 @@ include 'conexion.php';
                           
             do{      
                 
-                echo "<p align='center'><strong> Credenciales Válidas</strong></p><br>
-
+                echo "
                 <table border='1' align='center' style='text-align: center; width: 60%'>
             <tr>
                 <th>Tipo de Credencial</th>

@@ -116,10 +116,10 @@ include 'conexion.php';
         <input name='pin' type='text' pattern='([0-9]{4})' value='' required></br></br>
 
         <label for='ci'>Cédula de Identidad: </label>
-        <input type='text' name='ci' pattern='([0-9]{7})' placeholder='12345678' value=" . $resultado['CI'] . " required></br></br>
+        <input type='text' name='ci' pattern='([0-9]{8})' placeholder='12345678' value=" . $resultado['CI'] . " required></br></br>
 
         <label for='rut'>RUT: </label>
-        <input type='text' name='rut' pattern='([0-9]{6})' placeholder='12 dígitos numéricos' value=" . $resultado['RUT'] . " required></br></br>
+        <input type='text' name='rut' pattern='([0-9]{9}[0-9]{3})' placeholder='12 dígitos numéricos' value=" . $resultado['RUT'] . " required></br></br>
         
         <input type='submit' name='asignar' value='Asignar Credencial'>";
 

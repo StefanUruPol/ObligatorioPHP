@@ -3,7 +3,8 @@ require 'conexion.php';
 session_start();
 
 $email = $_POST['email'];
-$contrasenia = $_POST['password']; 
+$contrasenia = ($_POST['password']);
+$contrasenia = md5($contrasenia);
 
 $query = "SELECT COUNT(*) as contar FROM persona  WHERE email = '$email' AND password = '$contrasenia'";
 $consulta = mysqli_query($conexion, $query);
