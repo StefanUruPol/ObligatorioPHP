@@ -89,7 +89,7 @@ include 'conexion.php';
 
             $resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC);
             if(!$resultado) {
-                die("<p align='center'><strong> No hay credenciales validas!</strong></p>");
+                die("<p align='center'><strong> No hay Credenciales Válidas!</strong></p>");
             }
 
            //while ($resultado = mysqli_fetch_array($sql2, MYSQLI_ASSOC)) {

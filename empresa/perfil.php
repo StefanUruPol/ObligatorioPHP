@@ -102,6 +102,33 @@ include 'conexion.php';
 
         </form>
     </fieldset>";
+    if (isset($_POST['editar'])) {
+
+        $primer_nombre = $_POST['primerNombre'];
+        $segundo_nombre = $_POST['segundoNombre'];
+        $primer_apellido = $_POST['primerApellido'];
+        $segundo_apellido = $_POST['segundoApellido'];
+        $fecha = $_POST['fechaDeNacimiento'];
+        $password = md5($_POST['password']);
+        $foto = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+
+
+        $sql2 = mysqli_query($conexion, "UPDATE persona 
+        SET primer_nombre= '$primer_nombre', segundo_nombre= '$segundo_nombre',
+        primer_apellido= '$primer_apellido', segundo_apellido= '$segundo_apellido',
+        fecha_de_nacimiento= '$fecha',
+        foto= '$foto', password= '$password'
+        WHERE email = '$email'");
+
+
+
+        if ($sql2) {
+            echo "<p style=' text-align: center'><strong>Registro guardado</strong></p>";
+        }else{
+            die(mysqli_error($conexion));
+        }	  
+    }
+
         }
         ?>
 </body>
